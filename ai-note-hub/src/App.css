@@ -1,0 +1,108 @@
+.app {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.notes-section {
+  flex: 1;
+  overflow-y: auto;
+  transition: all var(--transition-base);
+}
+
+.notes-section.with-editor {
+  max-width: 45%;
+  border-right: 1px solid var(--glass-border);
+}
+
+.notes-section.full-width {
+  max-width: 100%;
+}
+
+.editor-section {
+  flex: 1;
+  overflow-y: auto;
+  animation: slide-in-up var(--transition-slow);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: var(--space-lg);
+  animation: fade-in var(--transition-slow);
+}
+
+.loading-container .spinner {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
+@media (max-width: 1024px) {
+  .main-content {
+    margin-left: 240px;
+  }
+
+  .notes-section.with-editor {
+    max-width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 64px;
+  }
+
+  .content-area {
+    flex-direction: column;
+  }
+
+  .notes-section.with-editor {
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+    max-height: 40vh;
+  }
+
+  .editor-section {
+    max-height: 60vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    margin-left: 0;
+    padding-top: 60px;
+  }
+
+  /* Mobile: sidebar becomes top nav */
+  .app .sidebar {
+    width: 100%;
+    height: 60px;
+    top: 0;
+    left: 0;
+    flex-direction: row;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .notes-section.with-editor {
+    display: none;
+    /* Hide list when editing on mobile */
+  }
+}

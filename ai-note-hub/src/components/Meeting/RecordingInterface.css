@@ -1,0 +1,174 @@
+.recording-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+    animation: fade-in var(--transition-base);
+}
+
+.recording-modal {
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    animation: scale-in var(--transition-base);
+}
+
+.recording-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.recording-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    background: var(--gradient-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.recording-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+}
+
+.error-message {
+    padding: var(--space-md);
+    background: linear-gradient(135deg, hsla(0, 75%, 60%, 0.2), hsla(0, 80%, 50%, 0.2));
+    border: 1px solid var(--color-error);
+    border-radius: var(--radius-md);
+    color: var(--color-error);
+    font-size: 0.875rem;
+    animation: slide-in-down var(--transition-base);
+}
+
+.recording-visualizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+}
+
+.recording-indicator {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 2px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-tertiary);
+    transition: all var(--transition-base);
+}
+
+.recording-indicator.active {
+    background: var(--gradient-primary);
+    border-color: var(--color-accent-purple);
+    color: white;
+    box-shadow: var(--glow-purple);
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.recording-duration {
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Fira Code', monospace;
+    color: var(--color-text-primary);
+}
+
+.recording-controls {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.record-button,
+.stop-button {
+    min-width: 180px;
+}
+
+.record-button {
+    box-shadow: var(--glow-purple);
+}
+
+.stop-button {
+    background: var(--gradient-accent);
+}
+
+.transcript-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    animation: slide-in-up var(--transition-base);
+}
+
+.transcript-container h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.transcript-text {
+    padding: var(--space-lg);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--color-text-primary);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .recording-modal {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .recording-body {
+        padding: var(--space-lg);
+    }
+
+    .recording-indicator {
+        width: 100px;
+        height: 100px;
+    }
+
+    .recording-duration {
+        font-size: 1.5rem;
+    }
+
+    .recording-controls {
+        flex-direction: column;
+    }
+
+    .record-button,
+    .stop-button {
+        width: 100%;
+    }
+}
