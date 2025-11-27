@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Home, Star, Archive, Tag, Trash2, Plus,
-    FileText, Clock, Settings as SettingsIcon
+    FileText, Clock, Settings as SettingsIcon,
+    CheckSquare, Sparkles, Upload, Image, Globe, ChevronDown, ChevronRight
 } from 'lucide-react';
 import './Sidebar.css';
 
-function Sidebar({ selectedView, onViewChange, notes, onCreateNote }) {
+function Sidebar({ selectedView, onViewChange, notes, onCreateNote, onImportPDF, onImportImage, onImportWeb }) {
+    const [showImportMenu, setShowImportMenu] = useState(false);
+
     const noteCount = notes.filter(n => !n.archived).length;
     const favoriteCount = notes.filter(n => n.favorite).length;
     const archivedCount = notes.filter(n => n.archived).length;
@@ -13,7 +16,8 @@ function Sidebar({ selectedView, onViewChange, notes, onCreateNote }) {
     const menuItems = [
         { id: 'all', icon: Home, label: 'All Notes', count: noteCount },
         { id: 'favorites', icon: Star, label: 'Favorites', count: favoriteCount },
-        { id: 'recent', icon: Clock, label: 'Recent', count: null },
+        { id: 'tasks', icon: CheckSquare, label: 'Tasks', count: null },
+        { id: 'digest', icon: Sparkles, label: 'Daily Digest', count: null },
         { id: 'archived', icon: Archive, label: 'Archived', count: archivedCount },
     ];
 
@@ -50,6 +54,36 @@ function Sidebar({ selectedView, onViewChange, notes, onCreateNote }) {
                         )}
                     </button>
                 ))}
+
+                <div className="nav-divider"></div>
+
+                <div className="import-section">
+                    <button
+                        className="nav-item import-toggle"
+                        onClick={() => setShowImportMenu(!showImportMenu)}
+                    >
+                        <Upload size={20} />
+                        <span className="nav-label">Import</span>
+                        {showImportMenu ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+                    </button>
+
+                    {showImportMenu && (
+                        <div className="import-menu">
+                            <button className="nav-item sub-item" onClick={onImportPDF}>
+                                <FileText size={18} />
+                                <span className="nav-label">PDF Document</span>
+                            </button>
+                            <button className="nav-item sub-item" onClick={onImportImage}>
+                                <Image size={18} />
+                                <span className="nav-label">Image / OCR</span>
+                            </button>
+                            <button className="nav-item sub-item" onClick={onImportWeb}>
+                                <Globe size={18} />
+                                <span className="nav-label">Web Clip</span>
+                            </button>
+                        </div>
+                    )}
+                </div>
             </nav>
 
             <div className="sidebar-footer">
